@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<script src='https://d3js.org/d3.v4.min.js'></script>
+<script>
+d3.csv('https://raw.githubusercontent.com/repeat/taiwan-high-speed-rail-timetable/master/southbound.csv', 
+function(d) {
+	var train_no = d.車次,
+		train_type = parseInt(train_no / 100 % 10),
+		today = new Date().toDateString() + " ";
+	switch (train_type) {
+		case 8:
+			return {
+				train_no: train_no,
+				NAK: new Date(today + d.南港),
+				TPE: new Date(today + d.台北),
+				BAC: new Date(today + d.板橋),
+				TAY: new Date(today + d.桃園),
+				HSC: new Date(today + d.新竹),
+				MIL: new Date(today + d.苗栗),
+				TAC: new Date(today + d.台中),
+				CHH: new Date(today + d.彰化),
+				YUL: new Date(today + d.雲林),
+				CHY: new Date(today + d.嘉義),
+				TNN: new Date(today + d.台南),
+				ZUY: new Date(today + d.左營)
+			};
+	};
+}, function(data) {
+	console.log(data);
+});
+</script>
