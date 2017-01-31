@@ -2,8 +2,11 @@
 <html>
 <head>
 <script src='https://d3js.org/d3.v4.min.js'></script>
+</head>
+<body>
+<svg id='mysvg' width='1000' height='800'></svg>
 <script>
-var var svg = d3.select('svg'),
+var svg = d3.select('svg'),
 	margin = 20,
 	width = parseInt(svg.attr('width')) - margin * 2,
 	height = parseInt(svg.attr('height')) - margin * 2,
@@ -49,8 +52,5 @@ function(d) {
 	console.log(data);
 });
 </script>
-</head>
-<body>
-<svg width='1000' height='800'></svg>
 </body>
 </html>
