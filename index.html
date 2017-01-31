@@ -8,6 +8,20 @@ var var svg = d3.select('svg'),
 	width = parseInt(svg.attr('width')) - margin * 2,
 	height = parseInt(svg.attr('height')) - margin * 2,
 	g = svg.append('g'),
+	mileage = {
+		NAK:  -3.298,
+		TPE:   5.904,
+		BAC:  13.120,
+		TAY:  42.285,
+		HSC:  72.179,
+		MIL: 104.865,
+		TAC: 165.733,
+		CHH: 193.886,
+		YUL: 218.480,
+		CHY: 251.585,
+		TNN: 313.860,
+		ZUY: 345.188
+	},
 	parseTime = d3.timeParse('%H:%M');
 d3.csv('https://raw.githubusercontent.com/repeat/taiwan-high-speed-rail-timetable/master/southbound.csv', 
 function(d) {
