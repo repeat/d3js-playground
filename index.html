@@ -1,7 +1,14 @@
 <!DOCTYPE html>
+<html>
+<head>
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <script>
-var parseTime = d3.timeParse('%H:%M');
+var var svg = d3.select('svg'),
+	margin = 20,
+	width = parseInt(svg.attr('width')) - margin * 2,
+	height = parseInt(svg.attr('height')) - margin * 2,
+	g = svg.append('g'),
+	parseTime = d3.timeParse('%H:%M');
 d3.csv('https://raw.githubusercontent.com/repeat/taiwan-high-speed-rail-timetable/master/southbound.csv', 
 function(d) {
 	var train_no = d.車次,
@@ -28,3 +35,8 @@ function(d) {
 	console.log(data);
 });
 </script>
+</head>
+<body>
+<svg width='1000' height='800'></svg>
+</body>
+</html>
