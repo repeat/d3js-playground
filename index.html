@@ -8,8 +8,8 @@
 <script>
 var svg = d3.select('svg'),
 	margin = 20,
-	width = parseInt(svg.attr('width')) - margin * 2,
-	height = parseInt(svg.attr('height')) - margin * 2,
+	width = +svg.attr('width') - margin * 2,
+	height = +svg.attr('height') - margin * 2,
 	g = svg.append('g'),
 	mileage = {
 		NAK:  -3.298,
