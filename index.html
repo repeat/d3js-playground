@@ -30,8 +30,8 @@ d3.csv('https://raw.githubusercontent.com/repeat/taiwan-high-speed-rail-timetabl
 function(d) {
 	var train_no = d.車次,
 		train_type = parseInt(train_no / 100 % 10);
-	switch (train_type) {
-		case 8:
+	switch (+train_no) {
+		case 803:
 			return {
 				train_no: train_no,
 				NAK: parseTime(d.南港),
