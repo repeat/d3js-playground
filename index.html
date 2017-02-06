@@ -2,15 +2,12 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
-
 body { font: 12px Arial;}
-
 path { 
     stroke: steelblue;
     stroke-width: 2;
     fill: none;
 }
-
 .axis path,
 .axis line {
     fill: none;
@@ -18,14 +15,10 @@ path {
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
-
 </style>
 <body>
-
 <script src="https://d3js.org/d3.v4.min.js"></script>
-
 <script>
-
 // Set the dimensions of the canvas / graph
 var margin = {top: 30, right: 20, bottom: 30, left: 50},
     width = 600 - margin.left - margin.right,
@@ -40,7 +33,6 @@ var y = d3.scaleLinear().range([height, 0]);
 
 // Define the axes
 var xAxis = d3.axisBottom(x).ticks(5);
-
 var yAxis = d3.axisLeft(y).ticks(5);
 
 // Define the line
@@ -84,8 +76,6 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/master/data.csv
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
-
 });
-
 </script>
 </body>
