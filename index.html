@@ -77,7 +77,20 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/master/data.csv
         .attr("class", "y axis")
         .call(yAxis);
 
-	console.log(data);
+    console.log(data);
+
+    // mock data
+    var dataB = [
+        {close: -8, date: parseDate("26-Apr-12")},
+        {close: 18, date: parseDate("28-Apr-12")},
+    ];
+    dataB.columns = ["date", "close"];
+    // now dataB has same structrure with data
+    console.log(dataB);
+
+    svg.append("path")
+        .attr("class", "line2")
+        .attr("d", valueline(dataB));
 });
 </script>
 </body>
