@@ -34,11 +34,15 @@ var parseDate = d3.timeParse("%d-%b-%y");
 
 // Set the ranges
 var x = d3.scaleTime().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
+// reverse the y axis
+// var y = d3.scaleLinear().range([height, 0]);
+var y = d3.scaleLinear().range([0, height]);
 
 // Define the axes
 var xAxis = d3.axisBottom(x).ticks(5);
 var yAxis = d3.axisLeft(y).ticks(5);
+// try ticks value
+var yAxis2 = d3.axisRight(y).ticks(10);
 
 // Define the line
 var valueline = d3.line()
@@ -63,7 +67,9 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/master/data.csv
     });
 
     // Scale the range of the data
-    x.domain(d3.extent(data, function(d) { return d.date; }));
+    // x.domain(d3.extent(data, function(d) { return d.date; }));
+    // try defined value instead of real value
+    x.domain([parseDate("1-Apr-12"), parseDate("1-Jun-12")]);
     y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
 
     // Add the valueline path.
@@ -82,20 +88,38 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/master/data.csv
         .attr("class", "y axis")
         .call(yAxis);
 
+    svg.append("g")
+        .attr("class", "y axis right")
+        // put axis on the graph right
+        .attr("transform", "translate(" + width + " ,0)")
+        .call(yAxis2);
+
     console.log(data);
 
     // mock data
     var dataB = [
         {close: -8, date: parseDate("26-Apr-12")},
         {close: 18, date: parseDate("28-Apr-12")},
+        // out of visible range
+        {close: -0, date: parseDate("20-May-12")},
     ];
     dataB.columns = ["date", "close"];
     // now dataB has same structrure with data
     console.log(dataB);
 
-    svg.append("path")
+    // mock one more data
+    var dataC = [
+        dataB, [
+            {close: -50, date: parseDate("1-Apr-12")},
+            {close: 20, date: parseDate("25-Apr-12")},
+            {close: 40, date: parseDate("22-May-12")},
+        ]
+    ];
+    dataC.forEach(function(subDataC) {
+        svg.append("path")
         .attr("class", "line2")
-        .attr("d", valueline(dataB));
+        .attr("d", valueline(subDataC));
+    });
 });
 </script>
 </body>
