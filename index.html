@@ -111,20 +111,6 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/79762873266ad79
     dataB.columns = ["date", "close"];
     // now dataB has same structrure with data
     console.log(dataB);
-
-    // mock one more data
-    var dataC = [
-        dataB, [
-            {close: -50, date: parseDate("1-Apr-12")},
-            {close: 20, date: parseDate("25-Apr-12")},
-            {close: 40, date: parseDate("22-May-12")},
-        ]
-    ];
-    dataC.forEach(function(subDataC) {
-        svg.append("path")
-        .attr("class", "line2")
-        .attr("d", valueline(subDataC));
-    });
 });
 </script>
 </body>
