@@ -40,6 +40,7 @@ var y = d3.scaleLinear().range([0, height]);
 
 // Define the axes
 var xAxis = d3.axisBottom(x).ticks(5);
+var xAxis2 = d3.axisTop(x).ticks(5);
 var yAxis = d3.axisLeft(y).ticks(5);
 // try ticks value
 var yAxis2 = d3.axisRight(y).ticks(10);
@@ -82,6 +83,11 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/79762873266ad79
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        // .attr("transform", "translate(0," + height + ")")
+        .call(xAxis2);
 
     // Add the Y Axis
     svg.append("g")
