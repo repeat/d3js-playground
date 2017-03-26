@@ -30,7 +30,7 @@ var margin = {top: 30, right: 20, bottom: 30, left: 50},
     height = 270 - margin.top - margin.bottom;
 
 // Parse the date / time
-var parseDate = d3.timeParse("%d-%b-%y");
+var parseDate = d3.timeParse("%H:%M");
 
 // Set the ranges
 var x = d3.scaleTime().range([0, width]);
@@ -46,7 +46,7 @@ var yAxis2 = d3.axisRight(y).ticks(10);
 
 // Define the line
 var valueline = d3.line()
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.time); })
     .y(function(d) { return y(d.close); });
     
 // Adds the svg canvas
@@ -60,16 +60,16 @@ var svg = d3.select("body")
 
 // Get the data
 // Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https, chrome-extension-resource.
-d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/master/data.csv", function(error, data) {
+d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/79762873266ad79e9446aa52a2fe6c8664c36cea/data.csv", function(error, data) {
     data.forEach(function(d) {
-        d.date = parseDate(d.date);
+        d.time = parseDate(d.time);
         d.close = +d.close;
     });
 
     // Scale the range of the data
     // x.domain(d3.extent(data, function(d) { return d.date; }));
     // try defined value instead of real value
-    x.domain([parseDate("1-Apr-12"), parseDate("1-Jun-12")]);
+    x.domain([parseDate("06:00"), parseDate("09:00")]);
     y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
 
     // Add the valueline path.
