@@ -25,9 +25,9 @@ path.line2 {
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 // Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
-    width = 600 - margin.left - margin.right,
-    height = 270 - margin.top - margin.bottom;
+var margin = {top: 30, right: 50, bottom: 30, left: 50},
+    width = 1000 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
 // Parse the date / time
 var parseDate = d3.timeParse("%H:%M");
@@ -39,11 +39,10 @@ var x = d3.scaleTime().range([0, width]);
 var y = d3.scaleLinear().range([0, height]);
 
 // Define the axes
-var xAxis = d3.axisBottom(x).ticks(5);
-var xAxis2 = d3.axisTop(x).ticks(5);
-var yAxis = d3.axisLeft(y).ticks(5);
-// try ticks value
-var yAxis2 = d3.axisRight(y).ticks(10);
+var xAxis = d3.axisBottom(x);
+var xAxis2 = d3.axisTop(x);
+var yAxis = d3.axisLeft(y);
+var yAxis2 = d3.axisRight(y);
 
 // Define the line
 var valueline = d3.line()
@@ -70,7 +69,7 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/79762873266ad79
     // Scale the range of the data
     // x.domain(d3.extent(data, function(d) { return d.date; }));
     // try defined value instead of real value
-    x.domain([parseDate("06:00"), parseDate("09:00")]);
+    x.domain([parseDate("06:00"), parseDate("10:00")]);
     y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
 
     // Add the valueline path.
@@ -100,17 +99,28 @@ d3.csv("https://raw.githubusercontent.com/repeat/d3js-playground/79762873266ad79
         .attr("transform", "translate(" + width + " ,0)")
         .call(yAxis2);
 
-
     // mock data
     var dataB = [
-        {close: -8, date: parseDate("26-Apr-12")},
-        {close: 18, date: parseDate("28-Apr-12")},
-        // out of visible range
-        {close: -0, date: parseDate("20-May-12")},
+        // 0
+        {close: -3.298, time: parseDate("07:20")},
+        // 3
+        {close: 5.904, time: parseDate("07:28")},
+        {close: 5.904, time: parseDate("07:31")},
+        // 1
+        {close: 13.120, time: parseDate("07:38")},
+        {close: 13.120, time: parseDate("07:39")},
+        // 2
+        {close: 165.733, time: parseDate("08:18")},
+        {close: 165.733, time: parseDate("08:20")},
+        // 0
+        {close: 345.188, time: parseDate("09:05")},
     ];
-    dataB.columns = ["date", "close"];
+    dataB.columns = ["time", "close"];
     // now dataB has same structrure with data
-    console.log(dataB);
+
+    svg.append("path")
+        .attr("class", "line2")
+        .attr("d", valueline(dataB));
 });
 </script>
 </body>
