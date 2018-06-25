@@ -1,3 +1,20 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+const url = "https://raw.githubusercontent.com/repeat/d3js-playground/master/v5-calendar-view/data.csv";
+const parseDate = d3.timeParse("%Y/%m/%d");
+let temp = [];
+
+d3.csv(url, (d) => {
+    let count = parseInt(d.count);
+    temp.push(count);
+
+    return {
+        date: parseDate(d.date),
+        count: count,
+    };
+}).then((data) => {
+    console.log(data);
+});
+</script>
